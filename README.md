@@ -5,14 +5,15 @@ Android browser-first controller companion for **Grimfall WoW (3.3.5)**, aimed a
 > Early prototype. Browser input integration is experimental and not hardware-tested. It does not modify the server or bundle a WoW client.
 
 ## Goals
-- Open Grimfall's web client in fullscreen Android WebView.
-- Capture physical gamepad input and provide configurable keyboard mappings.
-- Offer an optional on-screen button overlay.
+- Open Grimfall's web site/client in fullscreen Android WebView.
+- Capture physical gamepad button input and provide experimental key mappings.
+- Offer an on-screen key overlay.
 - Grow toward a dual-screen action-bar / radial-wheel companion.
 
 ## Prototype limitations
-- This prototype forwards synthetic keyboard events into the WebView. Grimfall may not respond to synthetic events, may require focus, or may rely on touch/canvas controls. Direct touch injection, Gamepad API integration, and second-screen support are not implemented yet.
-- The URL is configurable in source for now; default is Grimfall's site. Enter the exact webclient URL if it differs.
+- The initial build loads the Grimfall homepage. If the browser client is hosted at a separate route, navigate to it in the browser or edit the `home` URL in `MainActivity.java`.
+- This prototype forwards synthetic JavaScript keyboard events. Grimfall may not accept synthetic events, may require focus, or rely on touch/canvas controls. Direct touch injection, Gamepad API integration, and second-screen support are not implemented yet.
+- Controller buttons currently map to key taps/events (A=1, B=2, X=3, Y=4, L1=Q, R1=E, L2=R, R2=F). Mapping settings are not implemented.
 - No credentials are stored by the app.
 
 ## Build
