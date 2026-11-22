@@ -1,37 +1,76 @@
-# Roadmap & Milestones
+# Roadmap & Feature Parity
 
-## 0.1.1 — Input diagnostics
-- [x] Fullscreen WebView
-- [x] On-screen mapped-key test buttons
-- [x] Experimental physical-controller key mapping
-- [x] Saved client URL
-- [x] Hide/show overlay
-- [x] Button and stick-axis diagnostics
-- [ ] Confirm automated Android build succeeds
+The target is a Grimfall-specific handheld launcher and companion inspired by the feature breadth of DS Forever. We will implement original Grimfall integration, not copy DS Forever's code or assume its WoW-specific internals work here.
 
-## Verified browser-client direction
-Grimfall's official browser announcement (5 November 2026) describes dedicated mobile touch controls: movement stick, camera gestures and action buttons. Mobile touch controls are therefore the primary play route. Companion overlay buttons and synthetic keyboard events are fallback experiments, not assumed to be the mobile client's control mechanism.
+## 0.2 — Startup mode selector
+- [x] Start screen with Browser Client and Local Client choices
+- [x] Remember the last selected mode
+- [x] Browser mode opens existing WebView client
+- [x] Local mode has a clearly marked integration/setup placeholder
+- [x] Switch modes from browser overlay
 
-## 0.2 — Mobile client validation
-- [ ] Confirm the official Play/client URL from the user's own browser, avoiding account/session URLs in reports
-- [ ] Load the mobile touch interface inside WebView
-- [ ] Verify touch movement, camera gestures, action buttons and UI scaling
-- [ ] Test AYN Thor landscape layout, screen sizing and performance
-- [ ] Check fullscreen/immersive mode and browser back navigation
+## 0.3 — Browser client
+- [ ] Confirm Grimfall mobile client and official play URL
+- [ ] Test WebView touch movement, camera, action buttons, login and scaling
+- [ ] Preserve native touch controls and avoid obstructing UI
+- [ ] Determine if Gamepad API input is supported
+- [ ] Verify APK build and test on AYN Thor
 
-## 0.3 — Controller investigation
-- [ ] Determine whether the browser client itself reads Gamepad API input
-- [ ] Test controller event detection independently from in-game response
-- [ ] Research safe, feasible input routes: hardware key events, gamepad API, Android system remapping, or accessibility/touch bridge
-- [ ] Only implement analogue movement/camera after the input route is proven
-- [ ] Configurable mappings and saved profiles
+## 0.4 — Local client
+- [ ] Determine supported local Grimfall client options and Android compatibility
+- [ ] Local client detection and setup flow
+- [ ] Client folder selection / storage permissions, if applicable
+- [ ] Installation, patch and update workflow where legally and technically supported
+- [ ] Launch and sign-in flow, without storing credentials in Companion
+- [ ] Compatibility checks and recovery/error screens
 
-## 0.4 — Thor companion layout
-- [ ] AYN Thor second-screen capability and orientation research
-- [ ] Action-bar pages/modifier layers
-- [ ] Radial ability selector
-- [ ] Target/focus shortcuts
-- [ ] Quest, map and inventory shortcuts
+## 0.5 — Controller room
+- [ ] Button, trigger and stick mapping
+- [ ] Analogue movement and camera, if supported by the input route
+- [ ] Deadzones, sensitivity, invert axes and response curves
+- [ ] Profile presets and per-character bindings
+- [ ] Keyboard/gamepad/touch input diagnostics
+- [ ] Reliable game input bridge for local and browser modes
 
-## Input caveat
-Android receiving a controller event does not prove the game receives it. Synthetic JavaScript keyboard events are untrusted and may be ignored. The browser client has its own touch UI; don't replace or obscure it until testing shows a reason.
+## 0.6 — Gameplay companion
+- [ ] Multi-page action bars and modifier layers
+- [ ] Radial spell/ability/item/mount selection
+- [ ] Cooldown and cast tracking
+- [ ] Target, focus, assist and party selection
+- [ ] Pet command wheel
+- [ ] Macro manager and binding editor
+- [ ] Quick chat and push-to-talk/voice typing investigation
+
+## 0.7 — Character & inventory tools
+- [ ] Character-specific profiles
+- [ ] Gear slots and stat comparison
+- [ ] Bags, item search, tooltip helper and equipment actions where client APIs permit
+- [ ] Spell/talent/ability browser
+- [ ] Mounts, pets, professions and utility shortcuts
+
+## 0.8 — Azeroth navigation
+- [ ] World map and minimap companion
+- [ ] Quest list and tracking
+- [ ] Waypoints/navigation overlay where permitted
+- [ ] Party/raid status and dungeon utility
+
+## 0.9 — Thor dual-screen UI
+- [ ] Dedicated second-screen layout
+- [ ] Movable/resizable widgets
+- [ ] Game status, cast bar, party, buffs and cooldown panels
+- [ ] Touch-friendly companion rooms and tabs
+- [ ] Layouts that adapt to Thor orientation and screen dimensions
+
+## 1.0 — Settings, themes and quality
+- [ ] Themes and OLED-friendly mode
+- [ ] Layout editor and per-character preferences
+- [ ] Safe reset options and backups
+- [ ] Import/export profiles
+- [ ] Crash/error diagnostics with privacy controls
+- [ ] Release build, install/update flow and full Thor test checklist
+
+## Current limitations
+- Browser mode is implemented as a WebView shell with experimental synthetic-key controls.
+- Local client mode is currently a setup placeholder, not a working client launcher.
+- Neither controller gameplay nor second-screen functionality is hardware-verified.
+- We will validate each input method before relying on it; detected controller input is not proof the game received it.
