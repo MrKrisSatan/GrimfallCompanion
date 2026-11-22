@@ -57,7 +57,8 @@ public class MainActivity extends Activity {
         Button url=new Button(this);url.setText("URL");tools.addView(url);url.setOnClickListener(v->showUrlDialog());
         Button debug=new Button(this);debug.setText("Debug");tools.addView(debug);debug.setOnClickListener(v->toggleDebug());
         Button hide=new Button(this);hide.setText("Hide");tools.addView(hide);hide.setOnClickListener(v->panel.setVisibility(View.GONE));
-        status=new TextView(this);status.setTextColor(0xFFB8C9D9);status.setTextSize(11);status.setMaxWidth(440);panel.addView(status);\n        debugLog=new TextView(this);debugLog.setTextColor(0xFF8DD6B4);debugLog.setTextSize(10);debugLog.setMaxWidth(440);debugLog.setVisibility(View.GONE);panel.addView(debugLog);
+        status=new TextView(this);status.setTextColor(0xFFB8C9D9);status.setTextSize(11);status.setMaxWidth(440);panel.addView(status);
+        debugLog=new TextView(this);debugLog.setTextColor(0xFF8DD6B4);debugLog.setTextSize(10);debugLog.setMaxWidth(440);debugLog.setVisibility(View.GONE);panel.addView(debugLog);
         setStatus("Ready · controller events are experimental");
     }
     GradientDrawable bg(int c,int r){GradientDrawable d=new GradientDrawable();d.setColor(c);d.setCornerRadius(r);return d;}
@@ -76,7 +77,7 @@ public class MainActivity extends Activity {
         .setNegativeButton("Cancel",null).setNeutralButton("Homepage", (d,w)->{home="https://www.grimfallwow.com/";prefs.edit().putString("url",home).apply();web.loadUrl(home);})
         .setPositiveButton("Load",(d,w)->{String value=input.getText().toString().trim();if(value.startsWith("https://")||value.startsWith("http://")){home=value;prefs.edit().putString("url",home).apply();web.loadUrl(home);}else Toast.makeText(this,"Enter a URL beginning with https://",Toast.LENGTH_SHORT).show();}).show();
     }
-    void toggleDebug(){debugVisible=!debugVisible;if(debugLog!=null)debugLog.setVisibility(debugVisible?View.VISIBLE:View.GONE);setStatus(debugVisible?"Diagnostics enabled · raw controller events":"Diagnostics disabled");}\n    void logDebug(String msg){if(debugVisible&&debugLog!=null){String old=debugLog.getText().toString();debugLog.setText((old.length()>800?old.substring(old.length()-600):old)+"\\n"+msg);}}
+    void toggleDebug(){debugVisible=!debugVisible;if(debugLog!=null)debugLog.setVisibility(debugVisible?View.VISIBLE:View.GONE);setStatus(debugVisible?"Diagnostics enabled · raw controller events":"Diagnostics disabled");}\n    void logDebug(String msg){if(debugVisible&&debugLog!=null){String old=debugLog.getText().toString();debugLog.setText((old.length()>800?old.substring(old.length()-600):old)+"\n"+msg);}}
     @Override public boolean dispatchKeyEvent(android.view.KeyEvent e){
         String k=null;int c=e.getKeyCode();
         switch(c){case android.view.KeyEvent.KEYCODE_BUTTON_A:k="1";break;case android.view.KeyEvent.KEYCODE_BUTTON_B:k="2";break;case android.view.KeyEvent.KEYCODE_BUTTON_X:k="3";break;case android.view.KeyEvent.KEYCODE_BUTTON_Y:k="4";break;case android.view.KeyEvent.KEYCODE_BUTTON_L1:k="Q";break;case android.view.KeyEvent.KEYCODE_BUTTON_R1:k="E";break;case android.view.KeyEvent.KEYCODE_BUTTON_L2:k="R";break;case android.view.KeyEvent.KEYCODE_BUTTON_R2:k="F";break;}
