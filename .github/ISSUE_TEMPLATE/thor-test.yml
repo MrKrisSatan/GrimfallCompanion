@@ -1,0 +1,31 @@
+name: Thor test report
+description: Report AYN Thor testing results
+title: "[Thor test] "
+body:
+  - type: markdown
+    attributes:
+      value: "Redact passwords, email addresses, tokens, and private account details before posting."
+  - type: input
+    id: android
+    attributes:
+      label: Android version
+      placeholder: "e.g. Android 15"
+    validations:
+      required: false
+  - type: textarea
+    id: client
+    attributes:
+      label: Browser-client URL (sanitized)
+      description: Base URL only. Remove any session or token parameters.
+  - type: textarea
+    id: results
+    attributes:
+      label: Test results
+      description: WebView loading, login, buttons, stick axes, overlay hide/show.
+      validations:
+        required: true
+  - type: textarea
+    id: attachments
+    attributes:
+      label: Screenshots / logs
+      description: Redact account and personal details.
