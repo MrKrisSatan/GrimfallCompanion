@@ -13,7 +13,7 @@ Android browser-first controller companion for **Grimfall WoW (3.3.5)**, aimed a
 - Overlay hide/show.
 - Status text for button events and analog stick axes.
 
-## Important input caveat
+## Mobile-first strategy\nGrimfall's official browser-client announcement describes mobile touch controls (movement stick, camera gestures and action buttons). The native touch interface is the primary path to validate; the overlay's keyboard events are only an experimental fallback.\n\n## Important input caveat
 The app emits synthetic JavaScript keyboard events in WebView. Web games may ignore untrusted synthetic events, or use touch/canvas input. The status display confirms Android received a controller event, **not** that Grimfall acted on it. Analog movement and camera mapping are not implemented.
 
 ## Build APK
