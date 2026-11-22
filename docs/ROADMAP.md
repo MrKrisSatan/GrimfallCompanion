@@ -16,13 +16,18 @@ The target is a Grimfall-specific handheld launcher and companion inspired by th
 - [ ] Determine if Gamepad API input is supported
 - [ ] Verify APK build and test on AYN Thor
 
-## 0.4 — Local client
-- [ ] Determine supported local Grimfall client options and Android compatibility
-- [ ] Local client detection and setup flow
-- [ ] Client folder selection / storage permissions, if applicable
-- [ ] Installation, patch and update workflow where legally and technically supported
-- [ ] Launch and sign-in flow, without storing credentials in Companion
-- [ ] Compatibility checks and recovery/error screens
+## 0.4 — Local client and required addon bundle
+- [ ] Integrate a compatible 3.3.5a local runtime (investigate Android/Wine/Box64 route)
+- [ ] Bundle ConsolePortLK in the APK (mandatory for Local Client mode)
+- [ ] Pin and review the bundled ConsolePortLK version; include upstream LICENSE.md and notices
+- [ ] Local client detection and setup wizard
+- [ ] User selects client folder; validate expected files
+- [ ] Back up existing Interface/AddOns before addon installation
+- [ ] Install/repair ConsolePortLK automatically; replace only its own addon folders and preserve unrelated addons
+- [ ] Verify addon files and report installed version
+- [ ] Configure Thor mappings / ConsolePort setup for the Thor layout
+- [ ] Launch, patch/update and error recovery flow where supported
+- [ ] Never bundle proprietary WoW game files; user supplies them
 
 ## 0.5 — Controller room
 - [ ] Button, trigger and stick mapping
@@ -71,6 +76,6 @@ The target is a Grimfall-specific handheld launcher and companion inspired by th
 
 ## Current limitations
 - Browser mode is implemented as a WebView shell with experimental synthetic-key controls.
-- Local client mode is currently a setup placeholder, not a working client launcher.
+- Local Client mode is a navigation placeholder, not a working game launcher.
+- ConsolePortLK is a required dependency for the intended Local Client mode, but it is not embedded in the APK yet.
 - Neither controller gameplay nor second-screen functionality is hardware-verified.
-- We will validate each input method before relying on it; detected controller input is not proof the game received it.
