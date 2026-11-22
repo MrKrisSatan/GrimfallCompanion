@@ -8,7 +8,7 @@ import android.webkit.*;
 import android.widget.*;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.content.SharedPreferences;
+import android.content.SharedPreferences;\nimport android.net.Uri;\nimport android.content.Intent;\nimport androidx.documentfile.provider.DocumentFile;
 
 public class MainActivity extends Activity {
     WebView web;
@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
     SharedPreferences prefs;
     String home="https://www.grimfallwow.com/";
     String selectedMode="browser";
-    boolean debugVisible=false,gameView=false;
+    boolean debugVisible=false,gameView=false;\n    static final int PICK_WOW_FOLDER=9124;
 
     @Override public void onCreate(Bundle b) {
         super.onCreate(b);
@@ -55,12 +55,12 @@ public class MainActivity extends Activity {
         root.addView(screen,new FrameLayout.LayoutParams(-1,-1));
         screen.addView(label("LOCAL CLIENT",24,0xFFE7C77A));
         TextView info=label("Local mode is planned around a compatible 3.3.5a client. ConsolePortLK is a mandatory bundled component. The APK does not yet contain the addon or local runtime. Future setup will select and validate your own client folder, back up AddOns, install/repair ConsolePortLK while preserving other addons, configure Thor controls and launch.",14,0xFFE0E6ED);
-        info.setPadding(0,18,0,20);screen.addView(info);
+        info.setPadding(0,18,0,20);screen.addView(info);\n        Button install=menuButton("INSTALL / REPAIR CONSOLEPORTLK",0xFF66502A);screen.addView(install);\n        install.setOnClickListener(v->chooseClientFolder());
         Button browser=menuButton("Switch to Browser Client",0xFF244D70),back=menuButton("Back to mode selection",0xFF343D4B);screen.addView(browser);screen.addView(back);
         browser.setOnClickListener(v->{selectedMode="browser";prefs.edit().putString("last_mode",selectedMode).apply();launchBrowser();});
         back.setOnClickListener(v->showStartMenu());
     }
-    void launchBrowser(){
+    void chooseClientFolder(){\n        Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);\n        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);\n        startActivityForResult(intent,PICK_WOW_FOLDER);\n    }\n    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){\n        super.onActivityResult(requestCode,resultCode,data);\n        if(requestCode==PICK_WOW_FOLDER&&resultCode==RESULT_OK&&data!=null){Uri uri=data.getData();int flags=data.getFlags()&(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);try{getContentResolver().takePersistableUriPermission(uri,flags);}catch(Exception ignored){};\n            new AlertDialog.Builder(this).setTitle("Install ConsolePortLK?").setMessage("The selected folder must be the WoW 3.3.5a client root. Grimfall Companion will back up its ConsolePort addon folders and replace only those folders. Other addons will be left alone.").setNegativeButton("Cancel",null).setPositiveButton("Install / Repair",(d,w)->ConsolePortInstaller.install(this,uri)).show();\n        }\n    }\n    void launchBrowser(){
         gameView=true;clearRoot();web=new WebView(this);web.setFocusable(true);web.setFocusableInTouchMode(true);
         WebSettings settings=web.getSettings();settings.setJavaScriptEnabled(true);settings.setDomStorageEnabled(true);settings.setSupportZoom(false);
         web.setWebChromeClient(new WebChromeClient());web.setWebViewClient(new WebViewClient(){
