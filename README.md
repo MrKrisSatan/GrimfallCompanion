@@ -2,13 +2,13 @@
 
 A two-mode Android launcher and companion project for GrimfallWoW, aimed at the AYN Thor dual-screen handheld.
 
-**Status: 0.2 prototype.** The app starts with:
+**Status: 0.3 prototype.** The app starts with:
 - **Browser Client:** launches Grimfall in a fullscreen WebView with experimental controller/key overlay.
-- **Local Client:** opens a setup placeholder. Local client runtime and addon installation are not implemented yet.
+- **Local Client:** includes a folder-picker based ConsolePortLK installer/repair flow (network download, backup and folder installation). Local client runtime remains unimplemented.
 
 ## Local Client dependency (mandatory)
 
-The intended Local Client mode **must bundle ConsolePortLK** (upstream: https://github.com/leoaviana/ConsolePortLK) in the APK and automatically install/repair it in the user's selected 3.3.5a client folder. The bundled copy must preserve the upstream Artistic License 2.0 and notices. This is a required future milestone; it is **not embedded in the current prototype APK/source yet**.
+Local Client mode currently downloads the pinned ConsolePortLK **1.5.0-rc2** archive from upstream (https://github.com/leoaviana/ConsolePortLK) when the user presses Install/Repair, and installs its ConsolePort-prefixed addon folders into the selected client. The addon source is not embedded in the APK. The installer creates a timestamped backup directory under AddOns and replaces only ConsolePort-prefixed addon folders. Other addon folders are preserved. The install flow requires network access and the user to grant folder access via Android's system picker. This is an early installer and has not been tested on an actual Thor or WoW client.
 
 Setup will validate the user's own client files, back up existing AddOns, install only ConsolePortLK-owned folders, preserve unrelated addons, and avoid destructive WTF-folder resets.
 
