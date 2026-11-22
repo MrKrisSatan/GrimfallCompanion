@@ -1,6 +1,7 @@
 package com.mrkrissatan.grimfallcompanion;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.*;
 import android.webkit.*;
@@ -19,6 +20,7 @@ public class MainActivity extends Activity {
     String home="https://www.grimfallwow.com/";
     boolean overlayVisible=true;
     boolean debugVisible=false;
+    Button restoreOverlay;
 
     @Override public void onCreate(Bundle b) {
         super.onCreate(b);
