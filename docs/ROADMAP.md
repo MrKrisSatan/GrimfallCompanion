@@ -18,9 +18,9 @@ The target is a Grimfall-specific handheld launcher and companion inspired by th
 
 ## 0.4 — Local client and required addon bundle
 - [ ] Integrate a compatible 3.3.5a local runtime (investigate Android/Wine/Box64 route)
-- [ ] Bundle ConsolePortLK in the APK (mandatory for Local Client mode)
-- [ ] Pin and review the bundled ConsolePortLK version; include upstream LICENSE.md and notices
-- [ ] Local client detection and setup wizard
+- [x] Add in-app ConsolePortLK installer/repair downloader (pinned 1.5.0-rc2 archive)
+- [ ] Confirm upstream license notices and verify installer archive integrity
+- [x] Folder picker and Interface/AddOns validation\n- [ ] Local client detection and setup wizard
 - [ ] User selects client folder; validate expected files
 - [ ] Back up existing Interface/AddOns before addon installation
 - [ ] Install/repair ConsolePortLK automatically; replace only its own addon folders and preserve unrelated addons
