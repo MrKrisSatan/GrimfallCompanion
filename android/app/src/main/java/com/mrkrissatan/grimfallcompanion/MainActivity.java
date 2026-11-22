@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
         if(debugVisible && debugLog!=null) {
             String current = debugLog.getText().toString();
             if(current.length()>800) current=current.substring(current.length()-600);
-            debugLog.setText(current + "\\n" + msg);
+            debugLog.setText(current + "\n" + msg);
         }
     }
     void showUrlDialog() {
