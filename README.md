@@ -2,30 +2,40 @@
 
 Android browser-first controller companion for **Grimfall WoW (3.3.5)**, aimed at the AYN Thor dual-screen handheld.
 
-> Early prototype. Browser input integration is experimental and not hardware-tested. It does not modify the server or bundle a WoW client.
+**Status: 0.1.1 source prototype.** This is not yet a verified APK. Controller integration is experimental and has not been tested on Thor hardware.
 
-## Goals
-- Open Grimfall's web site/client in fullscreen Android WebView.
-- Capture physical gamepad button input and provide experimental key mappings.
-- Offer an on-screen key overlay.
-- Grow toward a dual-screen action-bar / radial-wheel companion.
+## Prototype features
+- Fullscreen Android WebView shell.
+- Loads Grimfall's site by default.
+- URL dialog: load a specific webclient address and persist it between launches.
+- Controller button-to-key mapping (A/B/X/Y → 1/2/3/4, L1/R1/L2/R2 → Q/E/R/F).
+- On-screen key buttons.
+- Overlay hide/show.
+- Status/debug feedback for button events and analog stick axes.
 
-## Prototype limitations
-- The initial build loads the Grimfall homepage. If the browser client is hosted at a separate route, navigate to it in the browser or edit the `home` URL in `MainActivity.java`.
-- This prototype forwards synthetic JavaScript keyboard events. Grimfall may not accept synthetic events, may require focus, or rely on touch/canvas controls. Direct touch injection, Gamepad API integration, and second-screen support are not implemented yet.
-- Controller buttons currently map to key taps/events (A=1, B=2, X=3, Y=4, L1=Q, R1=E, L2=R, R2=F). Mapping settings are not implemented.
-- No credentials are stored by the app.
+## Important input caveat
+The app emits synthetic JavaScript keyboard events in the WebView. Many web games ignore synthetic keyboard events because they do not represent trusted hardware input, and the Grimfall webclient may use touch or canvas-specific input. The controller event status only confirms Android received the input; it does **not** confirm the game acted on it. Analog movement and camera mapping are not implemented.
 
 ## Build
-Open `android/` in Android Studio, allow Gradle sync, then Build > Build APK(s).
+1. Install Android Studio and a supported Android SDK.
+2. Open the `android/` directory.
+3. Allow Gradle sync to complete.
+4. Build > Build APK(s).
+5. Install the debug APK on the AYN Thor and test with the checklist in `docs/TESTING.md`.
 
-## Website
-Project page sources are in `docs/`. GitHub Pages workflow is in `.github/workflows/pages.yml`.
+## Project site
+Sources are in `docs/`. GitHub Actions deploys the `docs` folder to GitHub Pages.
 
 ## Roadmap
-- [x] Initial source scaffold and project website
-- [ ] Build APK and install on AYN Thor
-- [ ] Test Grimfall webclient and controller response
-- [ ] Identify reliable input transport (keyboard events, Gamepad API, touch/accessibility bridge)
-- [ ] Custom mappings and profiles
-- [ ] Dual-screen UI: action bars, radial wheel, targeting, map/quest shortcuts
+- [x] Project website and Android source scaffold
+- [x] Configurable webclient URL
+- [x] Controller event status / stick-axis diagnostic
+- [ ] Build and install APK on Thor
+- [ ] Validate browser-client navigation/login
+- [ ] Confirm whether Grimfall accepts keyboard events
+- [ ] Implement reliable movement and camera bridge if feasible
+- [ ] Configurable key mappings and saved profiles
+- [ ] Dual-screen companion UI (action bars, radial selector, targeting, map/quest shortcuts)
+
+## Project independence
+Grimfall Companion is an independent community project, not affiliated with Grimfall. It does not store user credentials or bundle a WoW client.
