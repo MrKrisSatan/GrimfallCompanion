@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
         LinearLayout screen=new LinearLayout(this);screen.setOrientation(LinearLayout.VERTICAL);screen.setPadding(24,22,24,22);screen.setGravity(Gravity.CENTER_VERTICAL);screen.setBackgroundColor(0xFF10151F);
         root.addView(screen,new FrameLayout.LayoutParams(-1,-1));
         screen.addView(label("LOCAL CLIENT",24,0xFFE7C77A));
-        TextView info=label("Local mode is planned around a compatible 3.3.5a client. ConsolePortLK is a mandatory bundled component. The APK does not yet contain the addon or local runtime. Future setup will select and validate your own client folder, back up AddOns, install/repair ConsolePortLK while preserving other addons, configure Thor controls and launch.",14,0xFFE0E6ED);
+        TextView info=label("Local mode is planned around a compatible 3.3.5a client. ConsolePortLK is a mandatory bundled component. ConsolePortLK is downloaded from the pinned upstream release 1.5.0-rc2 and installed into the selected client AddOns folder. The local runtime itself is not bundled.",14,0xFFE0E6ED);
         info.setPadding(0,18,0,20);screen.addView(info);\n        Button install=menuButton("INSTALL / REPAIR CONSOLEPORTLK",0xFF66502A);screen.addView(install);\n        install.setOnClickListener(v->chooseClientFolder());
         Button browser=menuButton("Switch to Browser Client",0xFF244D70),back=menuButton("Back to mode selection",0xFF343D4B);screen.addView(browser);screen.addView(back);
         browser.setOnClickListener(v->{selectedMode="browser";prefs.edit().putString("last_mode",selectedMode).apply();launchBrowser();});
