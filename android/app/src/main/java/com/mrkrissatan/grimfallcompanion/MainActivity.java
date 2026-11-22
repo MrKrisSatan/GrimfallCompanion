@@ -8,7 +8,10 @@ import android.webkit.*;
 import android.widget.*;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.content.SharedPreferences;\nimport android.net.Uri;\nimport android.content.Intent;\nimport androidx.documentfile.provider.DocumentFile;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.content.Intent;
+import androidx.documentfile.provider.DocumentFile;
 
 public class MainActivity extends Activity {
     WebView web;
@@ -18,7 +21,8 @@ public class MainActivity extends Activity {
     SharedPreferences prefs;
     String home="https://www.grimfallwow.com/";
     String selectedMode="browser";
-    boolean debugVisible=false,gameView=false;\n    static final int PICK_WOW_FOLDER=9124;
+    boolean debugVisible=false,gameView=false;
+    static final int PICK_WOW_FOLDER=9124;
 
     @Override public void onCreate(Bundle b) {
         super.onCreate(b);
@@ -40,8 +44,10 @@ public class MainActivity extends Activity {
         TextView title=label("GRIMFALL COMPANION",25,0xFFE7C77A);title.setGravity(Gravity.CENTER);screen.addView(title);
         TextView subtitle=label("Choose how you want to enter Azeroth",15,0xFFCCD5E1);subtitle.setGravity(Gravity.CENTER);
         LinearLayout.LayoutParams sub=new LinearLayout.LayoutParams(-1,-2);sub.topMargin=10;sub.bottomMargin=24;screen.addView(subtitle,sub);
-        Button browser=menuButton("BROWSER CLIENT\nPlay Grimfall in WebView",0xFF244D70);
-        Button local=menuButton("LOCAL CLIENT\n3.3.5a + ConsolePortLK required",0xFF66502A);
+        Button browser=menuButton("BROWSER CLIENT
+Play Grimfall in WebView",0xFF244D70);
+        Button local=menuButton("LOCAL CLIENT
+3.3.5a + ConsolePortLK required",0xFF66502A);
         LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-1,0,1);bp.bottomMargin=12;screen.addView(browser,bp);
         screen.addView(local,new LinearLayout.LayoutParams(-1,0,1));
         TextView foot=label("Last used: "+(selectedMode.equals("local")?"Local Client":"Browser Client")+" · Switch modes any time",11,0xFF8C9BAE);foot.setGravity(Gravity.CENTER);
@@ -55,12 +61,25 @@ public class MainActivity extends Activity {
         root.addView(screen,new FrameLayout.LayoutParams(-1,-1));
         screen.addView(label("LOCAL CLIENT",24,0xFFE7C77A));
         TextView info=label("Local mode requires a compatible 3.3.5a client. ConsolePortLK 1.5.0-rc2 is downloaded from upstream and installed into the selected client AddOns folder. The local game runtime itself is not bundled.",14,0xFFE0E6ED);
-        info.setPadding(0,18,0,20);screen.addView(info);\n        Button install=menuButton("INSTALL / REPAIR CONSOLEPORTLK",0xFF66502A);screen.addView(install);\n        install.setOnClickListener(v->chooseClientFolder());
+        info.setPadding(0,18,0,20);screen.addView(info);
+        Button install=menuButton("INSTALL / REPAIR CONSOLEPORTLK",0xFF66502A);screen.addView(install);
+        install.setOnClickListener(v->chooseClientFolder());
         Button browser=menuButton("Switch to Browser Client",0xFF244D70),back=menuButton("Back to mode selection",0xFF343D4B);screen.addView(browser);screen.addView(back);
         browser.setOnClickListener(v->{selectedMode="browser";prefs.edit().putString("last_mode",selectedMode).apply();launchBrowser();});
         back.setOnClickListener(v->showStartMenu());
     }
-    void chooseClientFolder(){\n        Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);\n        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);\n        startActivityForResult(intent,PICK_WOW_FOLDER);\n    }\n    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){\n        super.onActivityResult(requestCode,resultCode,data);\n        if(requestCode==PICK_WOW_FOLDER&&resultCode==RESULT_OK&&data!=null){Uri uri=data.getData();int flags=data.getFlags()&(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);try{getContentResolver().takePersistableUriPermission(uri,flags);}catch(Exception ignored){};\n            new AlertDialog.Builder(this).setTitle("Install ConsolePortLK?").setMessage("The selected folder must be the WoW 3.3.5a client root. Grimfall Companion will back up its ConsolePort addon folders and replace only those folders. Other addons will be left alone.").setNegativeButton("Cancel",null).setPositiveButton("Install / Repair",(d,w)->ConsolePortInstaller.install(this,uri)).show();\n        }\n    }\n    void launchBrowser(){
+    void chooseClientFolder(){
+        Intent intent=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent,PICK_WOW_FOLDER);
+    }
+    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==PICK_WOW_FOLDER&&resultCode==RESULT_OK&&data!=null){Uri uri=data.getData();int flags=data.getFlags()&(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_WRITE_URI_PERMISSION);try{getContentResolver().takePersistableUriPermission(uri,flags);}catch(Exception ignored){};
+            new AlertDialog.Builder(this).setTitle("Install ConsolePortLK?").setMessage("The selected folder must be the WoW 3.3.5a client root. Grimfall Companion will back up its ConsolePort addon folders and replace only those folders. Other addons will be left alone.").setNegativeButton("Cancel",null).setPositiveButton("Install / Repair",(d,w)->ConsolePortInstaller.install(this,uri)).show();
+        }
+    }
+    void launchBrowser(){
         gameView=true;clearRoot();web=new WebView(this);web.setFocusable(true);web.setFocusableInTouchMode(true);
         WebSettings settings=web.getSettings();settings.setJavaScriptEnabled(true);settings.setDomStorageEnabled(true);settings.setSupportZoom(false);
         web.setWebChromeClient(new WebChromeClient());web.setWebViewClient(new WebViewClient(){
@@ -95,7 +114,8 @@ public class MainActivity extends Activity {
     }
     void setStatus(String text){if(status!=null)status.setText(text);}
     void toggleDebug(){debugVisible=!debugVisible;if(debugLog!=null)debugLog.setVisibility(debugVisible?View.VISIBLE:View.GONE);setStatus(debugVisible?"Diagnostics enabled":"Diagnostics disabled");}
-    void logDebug(String msg){if(debugVisible&&debugLog!=null){String current=debugLog.getText().toString();if(current.length()>800)current=current.substring(current.length()-600);debugLog.setText(current+"\n"+msg);}}
+    void logDebug(String msg){if(debugVisible&&debugLog!=null){String current=debugLog.getText().toString();if(current.length()>800)current=current.substring(current.length()-600);debugLog.setText(current+"
+"+msg);}}
     void showUrlDialog(){
         EditText input=new EditText(this);input.setSingleLine(true);input.setText(home);
         new AlertDialog.Builder(this).setTitle("Browser client URL").setView(input).setNegativeButton("Cancel",null)
