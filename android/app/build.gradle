@@ -1,0 +1,6 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'com.mrkrissatan.grimfallcompanion'
+    compileSdk 35
+    defaultConfig { applicationId 'com.mrkrissatan.grimfallcompanion'; minSdk 26; targetSdk 35; versionCode 1; versionName '0.1' }
+}
