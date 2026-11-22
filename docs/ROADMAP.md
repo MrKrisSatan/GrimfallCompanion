@@ -1,34 +1,34 @@
 # Roadmap & Milestones
 
-## 0.1.1 — Input diagnostics (source milestone)
+## 0.1.1 — Input diagnostics
 - [x] Fullscreen WebView
-- [x] Touch button row for mapped keyboard keys
-- [x] Physical controller buttons mapped to keys
-- [x] URL dialog with persisted webclient address
-- [x] Hide/show overlay controls
-- [x] Controller button and analog stick diagnostic status
-- [ ] Build APK and install on AYN Thor
+- [x] On-screen key buttons
+- [x] Controller buttons mapped to keyboard events
+- [x] Configurable browser-client URL (persisted)
+- [x] Hide/show overlay
+- [x] Button event and analog-axis diagnostic
+- [ ] Compile APK and test on Thor
 
 ## 0.2 — Input validation
-- [ ] Confirm Grimfall browser client URL and load path
-- [ ] Verify Android WebView compatibility, login and gameplay
-- [ ] Test physical button mapping and identify ignored synthetic keyboard events
-- [ ] Capture device/client version and sanitized test notes
-- [ ] Research direct Gamepad API, accessibility, touch dispatch and browser-specific approaches
+- [ ] Verify client URL and page navigation
+- [ ] Test login/gameplay in WebView
+- [ ] Determine whether synthetic JS keyboard events are accepted by Grimfall
+- [ ] Identify whether client relies on touch/canvas controls
+- [ ] Capture safe test results (no credentials)
 
-## 0.3 — Mapping UX
-- [ ] User-editable mappings
-- [ ] Profiles saved locally
-- [ ] Analog movement experiments (WASD thresholding, hold/release)
-- [ ] Camera/mouse experiments and sensitivity
-- [ ] Press/hold and key-up handling
+## 0.3 — Controller mapping
+- [ ] User-editable mappings and profiles
+- [ ] Key-down/key-up and repeat/hold refinement
+- [ ] Analog movement experiment
+- [ ] Camera/mouse experiment
+- [ ] Controller debug panel
 
 ## 0.4 — Thor dual-screen companion
-- [ ] Layout research on AYN Thor
-- [ ] Action bar pages and modifier layers
-- [ ] Radial ability selector
-- [ ] Target cycling / focus shortcuts
-- [ ] Quest, map and inventory shortcuts
+- [ ] Layout test on AYN Thor
+- [ ] Action-bar pages and modifiers
+- [ ] Radial selector
+- [ ] Target/focus shortcuts
+- [ ] Quest/map/inventory shortcuts
 
-## Risk
-Synthetic JavaScript KeyboardEvents are untrusted and frequently fail to trigger game controls. WebView controller event reception and game input acceptance are two separate tests. We will not describe controls as functional until tested against Grimfall itself.
+## Input risk
+Synthetic JavaScript KeyboardEvents are untrusted and may be ignored by games. Android receiving a controller event is a different test from Grimfall accepting it. Do not label gameplay controls functional until verified on-device.
