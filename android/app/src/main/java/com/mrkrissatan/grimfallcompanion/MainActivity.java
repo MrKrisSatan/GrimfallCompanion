@@ -79,7 +79,14 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle state) {
         super.onCreate(state);
         prefs = getSharedPreferences("companion", MODE_PRIVATE);
-        home = prefs.getString("url", home);
+        String savedUrl = prefs.getString("url", null);
+        if (savedUrl == null
+                || "https://www.grimfallwow.com/".equals(savedUrl)) {
+            home = "https://www.grimfallwow.com/play";
+            prefs.edit().putString("url", home).apply();
+        } else {
+            home = savedUrl;
+        }
         selectedMode = prefs.getString("last_mode", "browser");
         touchMoveEnabled = prefs.getBoolean("touch_move_enabled", true);
         getWindow().getDecorView().setSystemUiVisibility(
