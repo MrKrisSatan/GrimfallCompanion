@@ -39,7 +39,7 @@ Build Grimfall-specific feature parity with the breadth of DS Forever: controlle
 
 ## Build APK
 
-A GitHub Actions workflow builds a debug APK when Android source changes. Open the repository's Actions tab and download the **GrimfallCompanion-debug-apk** artifact from a successful run. A successful build is not proof of game compatibility.
+A debug APK was built successfully in GitHub Actions on 23 November 2026 from commit 3a1e13c. See the [verified build run](https://github.com/MrKrisSatan/GrimfallCompanion/actions/runs/45178871447) and download its **GrimfallCompanion-debug-apk** artifact. A successful build is not proof of game compatibility; AYN Thor and live Grimfall input testing are still outstanding.
 
 ## Project website
 
