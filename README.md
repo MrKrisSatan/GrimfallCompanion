@@ -43,7 +43,7 @@ A GitHub Actions workflow builds a debug APK when Android source changes. Open t
 
 ## Project website
 
-GitHub Pages source lives in docs/.
+GitHub Pages source lives in docs/. To publish it, open the repository's **Settings → Pages** and choose **GitHub Actions** under Build and deployment. The Actions token cannot enable Pages for this repository automatically, so the site remains unpublished until that one-time repository setting is selected.
 
 ## Independence
 
