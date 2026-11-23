@@ -22,7 +22,7 @@ The target is a Grimfall-specific handheld launcher and companion inspired by th
 - [ ] Verify that Grimfall accepts the injected multi-touch events
 - [ ] Test login, movement, camera, simultaneous inputs, buttons and scaling on AYN Thor
 - [ ] Check actual WebView Gamepad API availability; native controller sampling is the current route
-- [ ] Verify a successful APK build and archive the build artifact
+- [x] Build debug APK successfully in GitHub Actions and archive the artifact (23 November 2026, commit 3a1e13c)
 
 ## 0.4 — Local client and required addon installer
 - [ ] Integrate a compatible 3.3.5a local runtime (investigate Android/Wine/Box64 route)
